@@ -1,0 +1,62 @@
+<!-- FETCH DATA FROM A SERVERSIDE AND DISPLAY ON YOUR WEBSITE - IMPORTANT -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Object Notation</title>
+</head>
+<body>
+    <h1>JSON</h1>
+    <h2>JavaScript Object Notation</h2>
+    <h1>UserName Bellow</h1>
+    <ul id="users-container">
+
+    </ul>
+    <h1>Original Name Bellow</h1>
+    <ul id="name-container">
+
+    </ul>
+    <script>
+
+        //Visit - https://jsonplaceholder.typicode.com/
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(json => displayUser(json))
+
+        function displayUser(users){
+            const userNames = users.map(user => user.username);
+            const ul = document.getElementById("users-container");
+            // console.log(userNames);
+            for (let i = 0; i < userNames.length; i++) {
+                const username = userNames[i];
+                const li = document.createElement("li");
+                li.innerText = username ;
+                ul.appendChild(li) ;
+            }
+        }
+
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(json => displayName(json))
+
+        function displayName(names){
+            const userName = names.map(user => user.name);
+            // console.log(userName);
+            const ul = document.getElementById("name-container") ;
+            for(i = 0; i < userName.length; i++) {
+                const name = userName[i];
+                const li = document.createElement("li");
+                li.innerText = name ;
+                ul.appendChild(li);
+            }
+        }
+
+        
+    </script>
+</body>
+</html>
